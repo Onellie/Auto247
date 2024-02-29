@@ -6,14 +6,14 @@ const { get } = require('axios');
 let url = "https://ai-tools.replit.app";
 
 module.exports.config = {
-		name: "ai",
+		name: "Ai",
 		version: "1.0.0",
 		role: 0,
 		hasPrefix: false,
 		credits: "Deku",
 		description: "Talk to AI with continuous conversation.",
-		aliases:  ['What','Ai'],
-		usages: "[prompt]",
+		aliases:  ['What','ai'],
+		usages: "Ai [prompt]",
 		cooldown: 0,
 };
 

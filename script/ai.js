@@ -22,7 +22,7 @@ module.exports.run = async function({ api, event, args }) {
 				api.sendMessage(msg, event.threadID, event.messageID);
 		}
 		if (!args[0]) return sendMessage('Please provide a question first.');
-		const prompt = args.join(" ");
+		const prompt = args.join(" ");) 
 		try {
 				const response = await get(`${url}/gpt?prompt=${encodeURIComponent(prompt)}&uid=${event.senderID}`);
 				const data = response.data;

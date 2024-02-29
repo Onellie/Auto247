@@ -1,42 +1,33 @@
-const axios = require('axios');
+/* 
+If you encounter any errors, please give me feedback. Contact me on facebook https://facebook.com/joshg101
+*/
+
+const { get } = require('axios');
+let url = "https://ai-tools.replit.app";
 
 module.exports.config = {
-		name: "Ai",
+		name: "ai",
 		version: "1.0.0",
 		role: 0,
-		credits: "Eugene Aguilar",
-		description: "Interacts with a GPT-4 API",
-		cooldown: 5,
 		hasPrefix: false,
-		aliases: [""],
-		usages: "",
+		credits: "Deku",
+		description: "Talk to AI with continuous conversation.",
+		aliases:  ['What','Ai'],
+		usages: "[prompt]",
+		cooldown: 0,
 };
 
-module.exports.run = async function ({ api, event }) {
-		const args = event.body.split(/\s+/);
-		args.shift(); // Remove the command itself from the arguments
-
-		// Check if there are arguments
-		if (args.length === 0) {
-				api.sendMessage("Please provide a question or prompt.", event.threadID, event.messageID);
-				return;
+module.exports.run = async function({ api, event, args }) {
+		function sendMessage(msg) {
+				api.sendMessage(msg, event.threadID, event.messageID);
 		}
-
-		const apiUrl = `https://hiro-api.replit.app/ai/hercai?ask=${encodeURIComponent(args.join(' '))}`;
-
+		if (!args[0]) return sendMessage('Please provide a question first.');
+		const prompt = args.join(" ");
 		try {
-				const response = await axios.get(apiUrl);
-
-				// Check if the API response contains valid data
-				if (response.status === 200 && response.data && response.data.trim() !== "") {
-						const answer = response.data.trim();
-						api.sendMessage(answer, event.threadID, event.messageID);
-				} else {
-						console.error("Invalid or empty AI response");
-						api.sendMessage("Invalid or empty AI response", event.threadID, event.messageID);
-				}
+				const response = await get(`${url}/gpt?prompt=${encodeURIComponent(prompt)}&uid=${event.senderID}`);
+				const data = response.data;
+				return sendMessage(data.gpt4);
 		} catch (error) {
-				console.error("Error fetching AI response:", error);
-				api.sendMessage("Error fetching AI response", event.threadID, event.messageID);
+				return sendMessage(error.message);
 		}
-};
+}

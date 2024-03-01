@@ -5,7 +5,7 @@ module.exports = {
     name: "snoop",
     version: "1.1",
     author: "Otinxsandip",
-    countDown: 3,
+    countDown: 2,
     role: 0,
     longDescription: "voice",
     category: "ai",

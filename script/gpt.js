@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs-extra');
 const path = require('path');
-const ytdl = require("@neoxr/ytdl-core");
+const ytdl = require("ytdl-core");
 const yts = require("yt-search");
 
 async function lado(api, event, args, message) {

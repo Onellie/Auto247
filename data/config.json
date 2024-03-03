@@ -7,8 +7,8 @@
       ],
       "devMode": false,
       "database": false,
-      "restartTime": null
-    "fcaOption": {
+      "restartTime": false, 
+      "fcaOption": {
       "forceLogin": true,
       "listenEvents": true,
       "logLevel": "silent",
